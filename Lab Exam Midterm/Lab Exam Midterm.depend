@@ -1,10 +1,9 @@
 # depslib dependency file v1.0
-1598101506 source:f:\computer graphics\airportrunway\main.cpp
+1596957205 source:f:\computer graphics\lab exam midterm\main.cpp
 	<windows.h>
 	<GLUT/glut.h>
 	<GL/glut.h>
 	<stdlib.h>
-	<math.h>
 
 1301111162 f:\codeblocks setup\codeblocks\mingw\include\windows.h
 	<winresrc.h>
@@ -216,7 +215,4 @@
 	<GL/glut.h>
 
 1301111164 f:\codeblocks setup\codeblocks\mingw\include\gl\gl.h
-
-1341006774 f:\codeblocks setup\codeblocks\mingw\include\math.h
-	<_mingw.h>
 

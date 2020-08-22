@@ -28,19 +28,6 @@ void display() {
 	glClearColor(1.0f, 1.0f, 1.0f, 1.0f); // Set background color to black and opaque
 	glClear(GL_COLOR_BUFFER_BIT);         // Clear the color buffer (background)
 	glLineWidth(3);
-	// Draw a Red 1x1 Square centered at origin
-/*
-	glBegin(GL_LINES);              // Each set of 4 vertices form a quad
-	glColor3f(1.0f, 0.0f, 0.0f); // Red
-	glVertex2f(-1.0f, 0.0f);    // x, y
-	glVertex2f(1.0f, 0.0f);
-	glColor3f(0.0f,0.0f,1.0f);
-	glVertex2f(0.0f,1.0f);
-	glVertex2f(0.0f,-1.0f);
-
-    glEnd();
-
-*/
 
 
 	glBegin(GL_QUADS); // Each set of 4 vertices form a quad
@@ -61,26 +48,15 @@ void display() {
     glVertex2f(0.4,-0.2);
     glEnd();
 
-
-/*
-	glPointSize(8);
-	glBegin(GL_POINTS);
-	glColor3f(0.0,0.0,0.0);
-	glVertex2f(-0.2,-0.2);
-	glEnd();
-
-    glBegin(GL_LINES);
-    glColor3f(255.0,255.0,0.0);
-    glVertex2f(0.2,-0.2);
-    glVertex2f(0.8,-0.2);
-    glVertex2f(0.8,-0.2);
-    glVertex2f(0.5,-0.5);
-    glVertex2f(0.5,-0.5);
-    glVertex2f(0.2,-0.2);
-
+    glBegin(GL_QUADS);
+    glColor3ub(0,0,0);
+    glVertex2f(0.7,0.1);
+    glVertex2f(0.7,0.2);
+    glVertex2f(0.65,0.2);
+    glVertex2f(0.65,0.1);
     glEnd();
 
-*/
+
     glBegin(GL_TRIANGLES);
 
     glVertex2f(0.2,0.4);

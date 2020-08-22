@@ -22,10 +22,34 @@
 #include <stdlib.h>
 #include <math.h>
 # define PI           3.14159265358979323846
+  GLfloat t = 0.0f;
 
 
 
 /* GLUT callback Handlers */
+GLfloat position = 0.2f;
+GLfloat speed = 0.1f;
+
+void update(int value) {
+
+    if(position  > 1.0f)
+        position = -0.5f;
+
+    position += speed;
+
+	glutPostRedisplay();
+
+
+	glutTimerFunc(100, update, 0);
+}
+
+
+
+
+void idle()
+{
+    glutPostRedisplay();
+}
 
 
  void display()
@@ -106,7 +130,25 @@
     glEnd();
 
 
+
+
     //Aeroplane
+    glPushMatrix();
+    glTranslatef(position,0.0f, 0.0f);
+
+    //Bird
+
+    glBegin(GL_POLYGON);
+
+    glVertex2f(-0.7,0.7);
+    glVertex2f(-0.6,0.7);
+    glVertex2f(-0.65,0.68);
+
+    glEnd();
+
+
+
+    //Bird
 
     glBegin(GL_QUADS);
 
@@ -117,11 +159,41 @@
 
     glEnd();
 
-    //Aeroplane Window
+
+        //Cockpit
+    glBegin(GL_TRIANGLES);
+    glColor3ub(255,0,0);
+
+    glVertex2f(0.38,0.6);
+    glVertex2f(0.45,0.6);
+    glVertex2f(0.4,0.5);
+
+    glEnd();
+
+    //wing
+    glBegin(GL_QUADS);
+    glColor3ub(0,0,255);
+
+    glVertex2f(0.35,0.51);
+    glVertex2f(0.32,0.28);
+    glVertex2f(0.29,0.28);
+    glVertex2f(0.29,0.45);
 
 
+    glEnd();
 
-    //Aeroplane Window Two
+    //Upper wing
+
+    glBegin(GL_TRIANGLES);
+    glColor3ub(0,0,255);
+
+    glVertex2f(0.18,0.4);
+    glVertex2f(0.22,0.44);
+    glVertex2f(0.17,0.45);
+
+
+    glEnd();
+
     GLfloat n = 0.36f;
     GLfloat m =  0.55f;
     GLfloat radius = 0.005f;
@@ -234,41 +306,17 @@
 
     glEnd();
 
+    glPopMatrix();
+    //Aeroplane Window
 
 
-    //Cockpit
-    glBegin(GL_TRIANGLES);
-    glColor3ub(255,0,0);
 
-    glVertex2f(0.38,0.6);
-    glVertex2f(0.45,0.6);
-    glVertex2f(0.4,0.5);
-
-    glEnd();
-
-    //wing
-    glBegin(GL_QUADS);
-    glColor3ub(0,0,255);
-
-    glVertex2f(0.35,0.51);
-    glVertex2f(0.32,0.28);
-    glVertex2f(0.29,0.28);
-    glVertex2f(0.29,0.45);
+    //Aeroplane Window Two
 
 
-    glEnd();
-
-    //Upper wing
-
-    glBegin(GL_TRIANGLES);
-    glColor3ub(0,0,255);
-
-    glVertex2f(0.18,0.4);
-    glVertex2f(0.22,0.44);
-    glVertex2f(0.17,0.45);
 
 
-    glEnd();
+
 
     //Tower
 
@@ -694,6 +742,76 @@
 
     glEnd();
 
+    glPopMatrix();
+
+
+    //windmill
+    glTranslatef(-0.8,-0.3,0);
+    glScalef(0.2,0.2,0);
+
+    glBegin(GL_QUADS);
+
+    glColor3ub(100, 100, 204);
+    glVertex2f(-0.2f, -1.0f);
+    glVertex2f( 0.2f, -1.0f);
+    glVertex2f( 0.1f, 0.0f);
+    glVertex2f( -0.1f, 0.0f);
+    glEnd();
+    glLoadIdentity();
+
+    glPushMatrix(); //glPushMatrix copies the top matrix and pushes it onto the stack, while glPopMatrix pops the top matrix off the stack
+
+    //i=how many degree you want to rotate around an axis
+    glTranslatef(-0.8,-0.3,0);
+    glScalef(0.2,0.2,0);
+    glRotatef(t,0,0.0,0.1);
+
+
+
+
+    glBegin(GL_TRIANGLES);
+
+    glColor3ub(255, 150, 150);
+    glVertex2f(0.0f, 0.0f);
+    glVertex2f( 0.6f, -0.1f);
+    glVertex2f( 0.6f, 0.1f);
+    glEnd();
+
+    glBegin(GL_TRIANGLES);
+
+    glColor3ub(255, 150, 150);
+    glVertex2f(0.0f, 0.0f);
+    glVertex2f( 0.1f, 0.6f);
+    glVertex2f( -0.1f, 0.6f);
+    glEnd();
+
+    glBegin(GL_TRIANGLES);
+
+    glColor3ub(255, 150, 150);
+    glVertex2f(0.0f, 0.0f);
+    glVertex2f( -0.6f, 0.1f);
+    glVertex2f( -0.6f, -0.1f);
+    glEnd();
+
+    glBegin(GL_TRIANGLES);
+
+    glColor3ub(255, 150, 150);
+    glVertex2f(0.0f, 0.0f);
+    glVertex2f( -0.1f, -0.6f);
+    glVertex2f( 0.1f, -0.6f);
+    glEnd();
+
+
+
+
+
+
+
+
+
+    glPopMatrix();
+
+    t= t+ 5.0f;
 
 
 
@@ -716,6 +834,8 @@ int main(int argc, char *argv[])
 
     glutCreateWindow("Airport View");
     glutDisplayFunc(display);
+
+    glutTimerFunc(100, update, 0);
     glutMainLoop();
     return 0;
 }
