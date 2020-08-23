@@ -1,8 +1,9 @@
 # depslib dependency file v1.0
-1598161310 source:f:\computer graphics\airportrunway\main.cpp
+1598167507 source:f:\computer graphics\mousekeyboardinteraction\main.cpp
 	<windows.h>
 	<GLUT/glut.h>
 	<GL/glut.h>
+	<cstdio>
 	<stdlib.h>
 	<math.h>
 

@@ -27,7 +27,7 @@
 
 
 /* GLUT callback Handlers */
-GLfloat position = 0.2f;
+GLfloat position = -0.7f;
 GLfloat speed = 0.1f;
 
 GLfloat position2 = 0.8f;
@@ -36,7 +36,7 @@ GLfloat speed2 = 0.03f;
 void update(int value) {
 
     if(position  > 1.0f)
-        position = -0.5f;
+        position = -1.0f;
 
     position += speed;
 
@@ -49,22 +49,18 @@ void update(int value) {
 void update2(int value)
 {
     if(position2 < -1.5f)
-    {
-        position2 = 0.5f;
-    }
-    else{
+        position2 = 0.8f;
 
     position2 -= speed2;
+
     glutPostRedisplay();
+
     glutTimerFunc(100,update2,0);
-    }
+
 }
 
 
-void init()
-{
-    gluOrtho2D(-2,2,-2,2);
-}
+
 
 
 
@@ -856,7 +852,60 @@ void init()
 
 }
 
+void handleMouse(int button, int state, int x, int y) {
+	if (button == GLUT_LEFT_BUTTON)
+	{	speed += 0.1f;
+	{	speed2 += 0.1f;
+			}
+if (button == GLUT_RIGHT_BUTTON)
+	{
+	    speed -= 0.1f;
+	    speed2 -= 0.1f;
+	   }
+glutPostRedisplay();}
+}
 
+
+void handleKeypress(unsigned char key, int x, int y) {
+	switch (key) {
+case 'a':
+    speed = 0.0f;
+    speed2 = 0.0f;
+    break;
+case 'w':
+    speed = 0.1f;
+    speed2 = 0.1f;
+    break;
+glutPostRedisplay();
+	}}
+
+	void SpecialInput(int key, int x, int y)
+{
+switch(key)
+{
+case GLUT_KEY_UP:
+
+ speed = 0.3f;
+ speed2 = 0.3f;
+break;
+
+case GLUT_KEY_DOWN:
+  speed = 0.1f;
+  speed2 = 0.1f;
+  break;
+
+case GLUT_KEY_LEFT:
+    speed = 0.0f;
+    speed2 = 0.0f;
+break;
+
+case GLUT_KEY_RIGHT:
+    speed=0.1f;
+    speed2=0.1f;
+break;
+}
+glutPostRedisplay();
+}
 
 
 /* Program entry point */
@@ -870,9 +919,14 @@ int main(int argc, char *argv[])
 
     glutCreateWindow("Airport View");
     glutDisplayFunc(display);
-    init();
+
     glutTimerFunc(100, update, 0);
     glutTimerFunc(100,update2,0);
+
+    glutKeyboardFunc(handleKeypress);
+   glutMouseFunc(handleMouse);
+   glutSpecialFunc(SpecialInput);
+
     glutMainLoop();
     return 0;
 }
