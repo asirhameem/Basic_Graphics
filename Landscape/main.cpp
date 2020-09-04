@@ -1,7 +1,9 @@
+#define GLUT_DISABLE_ATEXIT_HACK
 #include<cstdio>
 #include <GL/gl.h>
 #include <GL/glut.h>
 #include <math.h>
+
 
 
 
@@ -39,15 +41,30 @@ void update(int value) {
 
 	glutTimerFunc(100, update, 0);
 }
+void updateSky(int value){
+
+    r = 19;
+    s = 0;
+
+    g = 24;
+    e = 51;
+
+    b = 98;
+    m = 102;
+
+    n = 255;
+
+    //glutPostRedisplay();
+    glutTimerFunc(10000,updateSky,0);
+}
 void updateSun(int value) {
 
     if(position2 > 0.7f)
         speed2=0.0f;
-        else
-    position2 += speed2;
+    else
+        position2 += speed2;
 
 	glutPostRedisplay();
-
 
 	glutTimerFunc(100, updateSun, 0);
 }
@@ -100,7 +117,8 @@ void updateCar2(int value) {
 }
 
 void init() {
-   glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+
 
 }
 
@@ -212,8 +230,8 @@ glBegin(GL_POLYGON);//Mountains 1
    glVertex2f(0.97f, 0.4f);
    glVertex2f(0.8f, 0.0f);
   glEnd();
-glBegin(GL_POLYGON);//Mountains 1
 
+  glBegin(GL_POLYGON);//Mountains 1
    glColor3ub(96,142,107);
    glVertex2f(1.0f, 0.0f);
    glVertex2f(0.8f, 0.6f);
@@ -567,16 +585,16 @@ glPopMatrix();
 
 glPushMatrix();
 
-    glBegin(GL_POLYGON);//Border brown
+glBegin(GL_POLYGON);//Border brown
 
 
-   glColor3ub(200, 140, 100);
-   glVertex2f(-1.0f, -0.150f);
-   glVertex2f(-1.0f, -0.18f);
-   glVertex2f(1.0f, -0.18f);
-   glVertex2f(1.0f, -0.150f);
+glColor3ub(200, 140, 100);
+glVertex2f(-1.0f, -0.150f);
+glVertex2f(-1.0f, -0.18f);
+glVertex2f(1.0f, -0.18f);
+glVertex2f(1.0f, -0.150f);
 
-   glEnd();
+glEnd();
 
 
 
@@ -839,12 +857,14 @@ int main(int argc, char** argv) {
    glutKeyboardFunc(handleKeypress);
    glutMouseFunc(handleMouse);
    glutTimerFunc(1000, update, 0);
+
    glutTimerFunc(1000, updateSun, 0);
    glutTimerFunc(100, updateCloud1, 0);
    glutTimerFunc(100, updateSmoke, 0);
    glutTimerFunc(100, updateCar, 0);
    glutTimerFunc(100, updateCar2, 0);
-
+   glutTimerFunc(20000,updateSky,0);
    glutMainLoop();
+
    return 0;
 }
