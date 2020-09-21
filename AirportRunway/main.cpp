@@ -61,10 +61,7 @@ void update2(int value)
 }
 
 
-void init()
-{
-    gluOrtho2D(-2,2,-2,2);
-}
+
 
 
 
@@ -870,7 +867,7 @@ int main(int argc, char *argv[])
 
     glutCreateWindow("Airport View");
     glutDisplayFunc(display);
-    init();
+
     glutTimerFunc(100, update, 0);
     glutTimerFunc(100,update2,0);
     glutMainLoop();
